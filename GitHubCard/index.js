@@ -6,8 +6,14 @@
 axios.get("https://api.github.com/users/OddyseyT")
 
 
-.then(response => {console.log('response', response)})
+.then(response => {console.log('response', response.data)
+response.data.forEach((i) => {
+  const user = cardMaker(i) 
+  cardData.appendChild(user)
+})
+})
 .catch(err => {console.log("something went wrong")})
+
 .then(() => {console.log("success")})
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -23,10 +29,7 @@ axios.get("https://api.github.com/users/OddyseyT")
 */
 const cardData = document.querySelector('.cards')
 
-response.data.forEach((i) => {
-  const user = cardMaker(i) 
-  cardData.appendChild(user)
-})
+
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
     follow this link in your browser https://api.github.com/users/<Your github name>/followers,
@@ -96,6 +99,14 @@ const cardMaker = (gitUser) => {
   following.textContent = followingNumber
   bio.textContent = userBio
 
+  imgUrl.classList.add('avatar-url')
+  gitUser.classList.add('name')
+  gitHandle.classList.add('login')
+  userLocation.classList.add('location')
+  gitLink.classList.add('url')
+  followerNumber.classList.add('followers')
+  followingNumber.classList.add('following')
+  userBio.classList.add('bio')
   return card;
 }
 /*
