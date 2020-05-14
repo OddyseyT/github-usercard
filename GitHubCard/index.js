@@ -5,7 +5,8 @@
 */
 axios.get("https://api.github.com/users/OddyseyT")
 
-/*.then(response => {console.log('response', response.data.message)})
+
+.then(response => {console.log('response', response)})
 .catch(err => {console.log("something went wrong")})
 .then(() => {console.log("success")})
 /*
@@ -20,7 +21,12 @@ axios.get("https://api.github.com/users/OddyseyT")
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
+const cardData = document.querySelector('.cards')
 
+response.data.forEach((i) => {
+  const user = cardMaker(i) 
+  cardData.appendChild(user)
+})
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
     follow this link in your browser https://api.github.com/users/<Your github name>/followers,
@@ -53,7 +59,45 @@ const followersArray = [];
       </div>
     </div>
 */
+const cardMaker = (gitUser) => {
+  const card = document.createElement('div')
+  const userImg =
+  document.createElement('img')
+  const cardInfo =
+  document.createElement('div')
+  const name =
+  document.createElement('h3')
+  const userName = document.createElement('p')
+  const location = document.createElement('p')
+  const profile =
+  document.createElement('p')
+  const profileLink = document.createElement('a')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
 
+  card.appendChild(userImg)
+  card.appendChild(cardInfo)
+  cardInfo.appendChild(name)
+  cardInfo.appendChild(userName)
+  cardInfo.appendChild(location)
+  cardInfo.appendChild(profileLink)
+  cardInfo.appendChild(followers)
+  cardInfo.appendChild(following)
+  cardInfo.appendChild(bio)
+
+  userImg.src = imgUrl
+  name.textContent = gitUser
+  userName.textContent = gitHandle
+  location.textContent = userLocation
+  profile.textContent = "Profile:"
+  profileLink.src = gitLink
+  followers.textContent = followerNumber
+  following.textContent = followingNumber
+  bio.textContent = userBio
+
+  return card;
+}
 /*
   List of LS Instructors Github username's:
     tetondan
