@@ -3,21 +3,21 @@
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>*/
 
-const sample = {login: "OddyseyT", name:"Theresa", avatar_url: "https://avatars3.githubusercontent.com/u/59707867?v=4", followers: 1, following: 0, location: "Chippewa Falls", html_url: "https://github.com/OddyseyT", bio: "confused"}
+/*const sample = {login: "OddyseyT", name:"Theresa", avatar_url: "https://avatars3.githubusercontent.com/u/59707867?v=4", followers: 1, following: 0, location: "Chippewa Falls", html_url: "https://github.com/OddyseyT", bio: "confused"}*/
 
 
 
-/*axios.get("https://api.github.com/users/OddyseyT")
+axios.get("https://api.github.com/users/OddyseyT")
 
 .then(response => {console.log('response', response.data)
-/*response.data.forEach((i) => {
   const user = cardMaker(response.data) 
   cards.appendChild(user)
-//})*/
+})
 
-/*.catch(err => {console.log("something went wrong")})
+.catch(err => {console.log("something went wrong")})
 
 .then(() => {console.log("success")})
+
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -44,7 +44,22 @@ const cards = document.querySelector('.cards')
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['CScori', 'immxalan', 'mgroff1', 'tetondan', 'dustinmyers', 'justsml', 'luishrd',
+'bigknell'];
+
+followersArray.forEach((person) => {
+  axios.get(`https://api.github.com/users/${person}`)
+
+.then(response => {console.log('response', response.data)
+  const user = cardMaker(response.data) 
+  cards.appendChild(user)
+})
+
+.catch(err => {console.log("something went wrong")})
+
+.then(() => {console.log("success")})
+  return cards
+})
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -80,7 +95,7 @@ const cardMaker = (gitUser) => {
   const followerNo = document.createElement('p')
   const followingNo = document.createElement('p')
   const userBio = document.createElement('p')
-  /*const link= document.createTextNode(`${gitUser.html_url}`)*/
+
 
   card.appendChild(userImg)
   card.appendChild(cardInfo)
@@ -93,12 +108,6 @@ const cardMaker = (gitUser) => {
   cardInfo.appendChild(followerNo)
   cardInfo.appendChild(followingNo)
   cardInfo.appendChild(userBio)
- 
-  /*profileLink.appendChild(link)
-
-  profileLink.title = `${gitUser.html_url}`
-  profileLink.href = gitUser.html_url
-  document.body.appendChild(profileLink)*/
 
   userImg.src = gitUser.avatar_url
   realName.textContent = gitUser.name
@@ -119,8 +128,8 @@ profileLink.innerHTML = `${gitUser.html_url}`
   return card;
 }
 
-const testRun = cardMaker(sample);
-cards.appendChild(testRun)
+/*const testRun = cardMaker(sample);
+cards.appendChild(testRun)*/
  /* {
   const newUser = cardMaker(item)
 cards.appendChild(newUser)}
