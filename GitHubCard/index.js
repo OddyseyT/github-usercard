@@ -3,15 +3,18 @@
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+/*const sample = {login: "OddyseyT", name:"Theresa", avatar_url: "https://avatars3.githubusercontent.com/u/59707867?v=4", followers: 1, following: 0, location: "Chippewa Falls", url: "https://api.github.com/users/OddyseyT", bio: "confused"}*/
+
+
+
 axios.get("https://api.github.com/users/OddyseyT")
 
-
 .then(response => {console.log('response', response.data)
-response.data.forEach((i) => {
-  const user = cardMaker(i) 
-  cardData.appendChild(user)
+/*response.data.forEach((i) => {*/
+  const user = cardMaker(response.data) 
+  cards.appendChild(user)
 })
-})
+
 .catch(err => {console.log("something went wrong")})
 
 .then(() => {console.log("success")})
@@ -27,7 +30,7 @@ response.data.forEach((i) => {
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
-const cardData = document.querySelector('.cards')
+const cards = document.querySelector('.cards') 
 
 
 /*
@@ -68,47 +71,51 @@ const cardMaker = (gitUser) => {
   document.createElement('img')
   const cardInfo =
   document.createElement('div')
-  const name =
+  const realName =
   document.createElement('h3')
   const userName = document.createElement('p')
-  const location = document.createElement('p')
-  const profile =
-  document.createElement('p')
+  const userLocation = document.createElement('p')
+  const profile = document.createElement('p')
   const profileLink = document.createElement('a')
-  const followers = document.createElement('p')
-  const following = document.createElement('p')
-  const bio = document.createElement('p')
+  const followerNo = document.createElement('p')
+  const followingNo = document.createElement('p')
+  const userBio = document.createElement('p')
 
   card.appendChild(userImg)
   card.appendChild(cardInfo)
-  cardInfo.appendChild(name)
+  cardInfo.appendChild(realName)
   cardInfo.appendChild(userName)
-  cardInfo.appendChild(location)
-  cardInfo.appendChild(profileLink)
-  cardInfo.appendChild(followers)
-  cardInfo.appendChild(following)
-  cardInfo.appendChild(bio)
+  cardInfo.appendChild(userLocation)
+  cardInfo.appendChild(profile)
+  cardInfo.appendChild(followerNo)
+  cardInfo.appendChild(followingNo)
+  cardInfo.appendChild(userBio)
+  profile.appendChild(profileLink)
 
-  userImg.src = imgUrl
-  name.textContent = gitUser
-  userName.textContent = gitHandle
-  location.textContent = userLocation
-  profile.textContent = "Profile:"
-  profileLink.src = gitLink
-  followers.textContent = followerNumber
-  following.textContent = followingNumber
-  bio.textContent = userBio
+  userImg.src = gitUser.avatar_url
+  realName.textContent = gitUser.name
+  userName.textContent = gitUser.login
+  userLocation.textContent = `Location: ${gitUser.location}` 
+  profileLink.src = `Profile: ${gitUser.html_url}`
+  followerNo.textContent = `Followers: ${gitUser.followers}`
+  followingNo.textContent = `Following: ${gitUser.following}`
+  userBio.textContent = `Bio: ${gitUser.bio}`
 
-  imgUrl.classList.add('avatar-url')
-  gitUser.classList.add('name')
-  gitHandle.classList.add('login')
-  userLocation.classList.add('location')
-  gitLink.classList.add('url')
-  followerNumber.classList.add('followers')
-  followingNumber.classList.add('following')
-  userBio.classList.add('bio')
+  userImg.classList.add('card', 'img')
+  realName.classList.add('card','name')
+  userName.classList.add('card', 'username')
+  cardInfo.classList.add('card')
+  
   return card;
 }
+
+/*const testRun = cardMaker(sample);
+cards.appendChild(testRun)
+ /* {
+  const newUser = cardMaker(item)
+cards.appendChild(newUser)}
+  );
+
 /*
   List of LS Instructors Github username's:
     tetondan
