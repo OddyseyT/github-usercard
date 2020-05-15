@@ -3,7 +3,7 @@
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>*/
 
-const sample = {login: "OddyseyT", name:"Theresa", avatar_url: "https://avatars3.githubusercontent.com/u/59707867?v=4", followers: 1, following: 0, location: "Chippewa Falls", url: "https://github.com/OddyseyT", bio: "confused"}
+const sample = {login: "OddyseyT", name:"Theresa", avatar_url: "https://avatars3.githubusercontent.com/u/59707867?v=4", followers: 1, following: 0, location: "Chippewa Falls", html_url: "https://github.com/OddyseyT", bio: "confused"}
 
 
 
@@ -80,6 +80,7 @@ const cardMaker = (gitUser) => {
   const followerNo = document.createElement('p')
   const followingNo = document.createElement('p')
   const userBio = document.createElement('p')
+  /*const link= document.createTextNode(`${gitUser.html_url}`)*/
 
   card.appendChild(userImg)
   card.appendChild(cardInfo)
@@ -87,30 +88,33 @@ const cardMaker = (gitUser) => {
   cardInfo.appendChild(userName)
   cardInfo.appendChild(userLocation)
   cardInfo.appendChild(profile)
+  cardInfo.appendChild(profileLink)
+  
   cardInfo.appendChild(followerNo)
   cardInfo.appendChild(followingNo)
   cardInfo.appendChild(userBio)
-  profile.appendChild(profileLink)
+ 
+  /*profileLink.appendChild(link)
+
+  profileLink.title = `${gitUser.html_url}`
+  profileLink.href = gitUser.html_url
+  document.body.appendChild(profileLink)*/
 
   userImg.src = gitUser.avatar_url
   realName.textContent = gitUser.name
   userName.textContent = gitUser.login
   userLocation.textContent = `Location: ${gitUser.location}` 
-  profileLink.textContent = "Profile:" 
-  profile.href = gitUser.html_url
+  profile.textContent = "Profile:" 
   followerNo.textContent = `Followers: ${gitUser.followers}`
   followingNo.textContent = `Following: ${gitUser.following}`
   userBio.textContent = `Bio: ${gitUser.bio}`
-
-  userImg.classList.add('card', 'img')
-  realName.classList.add('card','name')
-  userName.classList.add('card', 'username')
-  userLocation.classList.add ('card', 'p')
-  cardInfo.classList.add('card', 'p')
-  profileLink.classList.add('card', 'p')
-  followerNo.classList.add('card', 'p')
-  followingNo.classList.add('card', 'p')
-  userBio.classList.add('card','p')
+  
+profileLink.setAttribute('href', gitUser.html_url)
+profileLink.innerHTML = `${gitUser.html_url}`
+  card.classList.add('card')
+  cardInfo.classList.add('card-info')
+  realName.classList.add('name')
+  userName.classList.add('username')
   
   return card;
 }
