@@ -1,21 +1,21 @@
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
-    https://api.github.com/users/<your name>
-*/
-/*const sample = {login: "OddyseyT", name:"Theresa", avatar_url: "https://avatars3.githubusercontent.com/u/59707867?v=4", followers: 1, following: 0, location: "Chippewa Falls", url: "https://api.github.com/users/OddyseyT", bio: "confused"}*/
+    https://api.github.com/users/<your name>*/
+
+const sample = {login: "OddyseyT", name:"Theresa", avatar_url: "https://avatars3.githubusercontent.com/u/59707867?v=4", followers: 1, following: 0, location: "Chippewa Falls", url: "https://github.com/OddyseyT", bio: "confused"}
 
 
 
-axios.get("https://api.github.com/users/OddyseyT")
+/*axios.get("https://api.github.com/users/OddyseyT")
 
 .then(response => {console.log('response', response.data)
-/*response.data.forEach((i) => {*/
+/*response.data.forEach((i) => {
   const user = cardMaker(response.data) 
   cards.appendChild(user)
-})
+//})*/
 
-.catch(err => {console.log("something went wrong")})
+/*.catch(err => {console.log("something went wrong")})
 
 .then(() => {console.log("success")})
 /*
@@ -96,7 +96,8 @@ const cardMaker = (gitUser) => {
   realName.textContent = gitUser.name
   userName.textContent = gitUser.login
   userLocation.textContent = `Location: ${gitUser.location}` 
-  profileLink.src = `Profile: ${gitUser.html_url}`
+  profileLink.textContent = "Profile:" 
+  profile.href = gitUser.html_url
   followerNo.textContent = `Followers: ${gitUser.followers}`
   followingNo.textContent = `Following: ${gitUser.following}`
   userBio.textContent = `Bio: ${gitUser.bio}`
@@ -104,12 +105,17 @@ const cardMaker = (gitUser) => {
   userImg.classList.add('card', 'img')
   realName.classList.add('card','name')
   userName.classList.add('card', 'username')
-  cardInfo.classList.add('card')
+  userLocation.classList.add ('card', 'p')
+  cardInfo.classList.add('card', 'p')
+  profileLink.classList.add('card', 'p')
+  followerNo.classList.add('card', 'p')
+  followingNo.classList.add('card', 'p')
+  userBio.classList.add('card','p')
   
   return card;
 }
 
-/*const testRun = cardMaker(sample);
+const testRun = cardMaker(sample);
 cards.appendChild(testRun)
  /* {
   const newUser = cardMaker(item)
